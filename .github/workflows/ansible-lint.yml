@@ -6,6 +6,12 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout the collection repository
+        uses: Qalthos/github_actions/.github/actions/checkout_repository@depends_on
+        with:
+          repository: ${{ github.repository }}
+          path: ${{ env.source_directory }}
+          ref: ${{ github.event.pull_request.head.sha }}
+
       - name: Run ansible-lint
         uses: ansible-community/ansible-lint-action@main

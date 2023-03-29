@@ -85,11 +85,11 @@ jobs:
     name: "py${{ matrix.python-version }} / ${{ matrix.ansible-version }}"
     steps:
       - name: Checkout the collection repository
-        uses: actions/checkout@v3
+        uses: Qalthos/github_actions/.github/actions/checkout_repository@depends_on
         with:
+          repository: ${{ github.repository }}
           path: ${{ env.source_directory }}
           ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: "0"
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
